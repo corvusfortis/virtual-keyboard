@@ -1,12 +1,25 @@
 .vc__container {
-  margin: 0 auto;
+  
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
 
+.vc__textarea {
+  margin: 0 auto;
+}
+
+.vc__keyboard {
+  margin: 0 auto;
+}
+
 .vc__keyboard-cell {
-  width: 10px;
-	height: 10px;
+  width: 60px;
+	height: 60px;
 	border: 1px solid black;
+}
+
+.vc__keyboard-cell_keydown {
+  color: white;
+  background-color: black;
 }
