@@ -17,14 +17,23 @@
   width: 60px;
 	height: 60px;
 	border: 1px solid black;
+  transition: .3s;
 }
 
 .vc__keyboard-cell:hover {
   color: white;
   background-color: black;
+  transition: .3s;
 }
 
 .vc__keyboard-cell_keydown {
   color: white;
   background-color: black;
+  transition: .1s;
+  
+}
+
+.vc__keyboard-cell_rounded {
+  border-radius: 100px;
+  transition: .1s;
 }

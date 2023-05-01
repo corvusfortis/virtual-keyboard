@@ -58,9 +58,11 @@
     document.body.appendChild(container);
 
     window.addEventListener('keydown', pressHighlight);
+    
     window.addEventListener('keyup', removeHighlight);
 
-    document.querySelectorAll('.vc__keyboard-cell').forEach(e => e.addEventListener('click', clickWrite));
+    document.querySelectorAll('.vc__keyboard-cell').forEach(e => e.addEventListener('mousedown', clickWrite));
+    document.querySelectorAll('.vc__keyboard-cell').forEach(e => e.addEventListener('mouseup', removeRound));
     }
 
     function pressHighlight(event){
@@ -69,8 +71,18 @@
       keys.forEach(e => {
         if(e.textContent === event.key.toLowerCase()){
           e.classList.add('vc__keyboard-cell_keydown');
-            document.querySelector('textarea').textContent = document.querySelector('textarea').textContent + e.textContent;
-          
+          e.classList.add('vc__keyboard-cell_rounded');
+            document.querySelector('textarea').textContent += e.textContent;
+        }else{
+          switch(event.key){
+            case 'Enter':
+              document.querySelector('textarea').textContent += '\n';
+              break;
+            case 'Backspace':
+              console.log(document.querySelector('textarea').textContent.length - 1);
+              document.querySelector('textarea').textContent = document.querySelector('textarea').textContent.slice(0, document.querySelector('textarea').textContent.length - 1);
+              break;
+          }
         }
       })
     }
@@ -79,10 +91,18 @@
       const keys = document.querySelectorAll('.vc__keyboard-cell');
 
       keys.forEach(e => e.classList.remove('vc__keyboard-cell_keydown'));
+      keys.forEach(e => e.classList.remove('vc__keyboard-cell_rounded'));
     }
 
     function clickWrite (event){
       document.querySelector('textarea').textContent = document.querySelector('textarea').textContent + event.target.textContent;
+      event.target.classList.add('vc__keyboard-cell_rounded');
+      event.target.classList.add('vc__keyboard-cell_keydown');
+    }
+
+    function removeRound (event){
+      event.target.classList.remove('vc__keyboard-cell_rounded');
+      event.target.classList.remove('vc__keyboard-cell_keydown');
     }
 
     window.addEventListener('load', createTextArea);
