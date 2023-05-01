@@ -44,14 +44,17 @@
 
     window.addEventListener('keydown', pressHighlight);
     window.addEventListener('keyup', removeHighlight);
+
+    document.querySelectorAll('.vc__keyboard-cell').forEach(e => e.addEventListener('click', clickWrite));
     }
 
     function pressHighlight(event){
       const keys = document.querySelectorAll('.vc__keyboard-cell');
 
       keys.forEach(e => {
-        if(e.textContent === event.key){
-          e.classList.add('vc__keyboard-cell_keydown')
+        if(e.textContent === event.key.toLowerCase()){
+          e.classList.add('vc__keyboard-cell_keydown');
+          document.querySelector('textarea').textContent = document.querySelector('textarea').textContent + e.textContent;
         }
       })
     }
@@ -60,6 +63,10 @@
       const keys = document.querySelectorAll('.vc__keyboard-cell');
 
       keys.forEach(e => e.classList.remove('vc__keyboard-cell_keydown'));
+    }
+
+    function clickWrite (event){
+      document.querySelector('textarea').textContent = document.querySelector('textarea').textContent + event.target.textContent;
     }
 
     window.addEventListener('load', createTextArea);

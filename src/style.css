@@ -19,6 +19,11 @@
 	border: 1px solid black;
 }
 
+.vc__keyboard-cell:hover {
+  color: white;
+  background-color: black;
+}
+
 .vc__keyboard-cell_keydown {
   color: white;
   background-color: black;
